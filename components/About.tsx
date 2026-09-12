@@ -17,7 +17,7 @@ export default function About() {
         </Reveal> */}
 
         <Reveal>
-          <div className="aspect-[4/5] rounded-card flex items-center justify-center">
+          <div className="aspect-[4/5] rounded-card bg-sand flex items-center justify-center">
             <img
               src={images.about}
               alt="Logo Pandanara"

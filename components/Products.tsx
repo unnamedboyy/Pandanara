@@ -1,19 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { categories, products, Product } from "@/lib/siteConfig";
+import type { Category, Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import Reveal from "./Reveal";
 
-// Inset ini meniru jarak yang dihasilkan mx-auto + max-w-container + px-6/px-10
-// di section lain, tapi ditulis sebagai padding supaya baris scroll tetap bisa
-// overflow ke kanan.
 const railInsetLeft =
   "pl-6 md:pl-[max(2.5rem,calc((100%_-_1240px)/2_+_2.5rem))]";
 const railInsetRight = "pr-6 md:pr-10";
 
-export default function Products() {
+type ProductsProps = {
+  categories: Category[];
+  products: Product[];
+};
+
+export default function Products({ categories, products }: ProductsProps) {
   const [selected, setSelected] = useState<Product | null>(null);
 
   return (
@@ -39,7 +41,7 @@ export default function Products() {
           if (categoryProducts.length === 0) return null;
 
           return (
-            <div key={category.slug}>
+            <div key={category.id}>
               <Reveal>
                 <h3
                   className={`font-display text-[22px] sm:text-[24px] text-ink ${railInsetLeft}`}
@@ -48,7 +50,7 @@ export default function Products() {
                 </h3>
               </Reveal>
 
-              <div className="mt-6 px-0 mx-auto max-w-container overflow-x-scroll snap-x snap-mandatory scrollbar-hide">
+              <div className="mt-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
                 <div
                   className={`flex gap-5 pb-2 w-max ${railInsetLeft} ${railInsetRight}`}
                 >

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
-import { Product, getWhatsappUrl } from "@/lib/siteConfig";
+import { getWhatsappUrl } from "@/lib/siteConfig";
+import { Product } from "@/lib/products";
 import { useCart } from "./CartContext";
 import Frame from "./Frame";
 
@@ -62,7 +63,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
         </button>
 
         <Frame
-          src={product.image}
+          src={product.image || ""}
           alt={product.name}
           label="Product Image"
           className="aspect-[4/3] sm:rounded-t-card"

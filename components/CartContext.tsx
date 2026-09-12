@@ -8,7 +8,14 @@ import {
   useMemo,
   ReactNode,
 } from "react";
-import { Product, CartItem } from "@/lib/siteConfig";
+import { Product } from "@/lib/products";
+
+export type CartItem = {
+  id: string;
+  name: string;
+  price: string;
+  quantity: number;
+};
 
 type CartContextValue = {
   items: CartItem[];

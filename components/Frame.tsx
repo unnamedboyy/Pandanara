@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 type FrameProps = {
-  src: string;
+  src?: string | null;
   alt: string;
   label?: string;
   className?: string;
@@ -31,7 +31,7 @@ export default function Frame({
 }: FrameProps) {
   const [failed, setFailed] = useState(false);
 
-  if (failed) {
+  if (failed || !src) {
     return (
       <div
         className={`relative flex items-center justify-center overflow-hidden bg-sand border border-ink/10 ${className}`}

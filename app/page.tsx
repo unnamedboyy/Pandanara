@@ -8,17 +8,23 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartContext";
 import FloatingCart from "@/components/FloatingCart";
+import { getCategories, getProducts } from "@/lib/products";
 
-export default function Home() {
+export default async function Home() {
+  const [categories, products] = await Promise.all([
+    getCategories(),
+    getProducts(),
+  ]);
+
   return (
     <CartProvider>
       <Navbar />
       <main>
         <Hero />
         <About />
-        <Products />
+        <Products categories={categories} products={products} />
         <WhyPandanara />
-        {/* <Gallery /> */}
+        <Gallery />
         <CTA />
       </main>
       <Footer />

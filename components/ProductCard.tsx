@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Plus } from "lucide-react";
-import { Product } from "@/lib/siteConfig";
+import { Product } from "@/lib/products";
 import { useCart } from "./CartContext";
 import Frame from "./Frame";
 
@@ -23,7 +23,7 @@ export default function ProductCard({ product, onSelect }: ProductCardProps) {
           aria-label={`Lihat detail ${product.name}`}
         >
           <Frame
-            src={product.image}
+            src={product.image ?? ""}
             alt={product.name}
             label="Product Image"
             sizes="240px"

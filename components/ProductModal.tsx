@@ -63,7 +63,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
         </button>
 
         <Frame
-          src={product.image || ""}
+          src={product.image}
           alt={product.name}
           label="Product Image"
           className="aspect-[4/3] sm:rounded-t-card"

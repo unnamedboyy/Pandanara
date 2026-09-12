@@ -23,7 +23,7 @@ export default function ProductCard({ product, onSelect }: ProductCardProps) {
           aria-label={`Lihat detail ${product.name}`}
         >
           <Frame
-            src={product.image ?? ""}
+            src={product.image}
             alt={product.name}
             label="Product Image"
             sizes="240px"

@@ -9,6 +9,8 @@ import Reveal from "./Reveal";
 const railInsetLeft =
   "pl-6 md:pl-[max(2.5rem,calc((100%_-_1240px)/2_+_2.5rem))]";
 const railInsetRight = "pr-6 md:pr-10";
+const railScrollPadding =
+  "scroll-pl-6 md:scroll-pl-[max(2.5rem,calc((100%_-_1240px)/2_+_2.5rem))]";
 
 type ProductsProps = {
   categories: Category[];
@@ -24,7 +26,7 @@ export default function Products({ categories, products }: ProductsProps) {
         <Reveal>
           <div className="max-w-[520px]">
             <h2 className="font-display text-[32px] sm:text-[38px] md:text-[42px] text-ink">
-              Our Favorites
+              Our Menus
             </h2>
             <p className="mt-4 text-[16px] leading-relaxed text-ink/70">
               Temukan camilan favorit Pandanara untuk menemani setiap momen.
@@ -50,7 +52,9 @@ export default function Products({ categories, products }: ProductsProps) {
                 </h3>
               </Reveal>
 
-              <div className="mt-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+              <div
+                className={`mt-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide ${railScrollPadding}`}
+              >
                 <div
                   className={`flex gap-5 pb-2 w-max ${railInsetLeft} ${railInsetRight}`}
                 >

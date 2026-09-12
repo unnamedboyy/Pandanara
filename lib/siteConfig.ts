@@ -31,7 +31,7 @@ export function getWhatsappUrl(customMessage?: string) {
 
 export const images = {
   hero: "/images/hero.jpg",
-  about: "/images/about.jpg",
+  about: "/logo.png",
 };
 
 export const galleryImages = [

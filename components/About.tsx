@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section id="about" className="py-[70px] md:py-[120px] bg-sand/60">
       <div className="mx-auto max-w-container px-6 md:px-10 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-        <Reveal>
+        {/* <Reveal>
           <Frame
             src={images.about}
             alt="Proses pembuatan camilan Pandanara"
@@ -14,6 +14,16 @@ export default function About() {
             sizes="(min-width: 768px) 560px, 100vw"
             className="aspect-[4/5] rounded-card"
           />
+        </Reveal> */}
+
+        <Reveal>
+          <div className="aspect-[4/5] rounded-card bg-sand flex items-center justify-center">
+            <img
+              src={images.about}
+              alt="Logo Pandanara"
+              className="w-2/3 max-w-[280px] object-contain"
+            />
+          </div>
         </Reveal>
 
         <Reveal delay={100}>
@@ -31,7 +41,7 @@ export default function About() {
               yang jujur selalu lebih diingat daripada yang rumit.
             </p>
             <p className="mt-4 max-w-[460px] text-[16px] leading-relaxed text-ink/70">
-              Kami percaya camilan yang baik tidak harus mahal atau ribet — cukup dibuat
+              Kami percaya camilan yang baik tidak harus mahal atau ribet,, cukup dibuat
               dengan bahan yang jelas dan proses yang diperhatikan setiap langkahnya.
             </p>
         </Reveal>

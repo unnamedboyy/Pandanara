@@ -7,7 +7,7 @@ export default function WhyPandanara() {
       <div className="mx-auto max-w-container px-6 md:px-10">
         <Reveal>
           <h2 className="font-display text-[32px] sm:text-[38px] md:text-[42px] text-ink max-w-[520px]">
-            Why Pandanara
+            Why Pandanara?
           </h2>
         </Reveal>
 

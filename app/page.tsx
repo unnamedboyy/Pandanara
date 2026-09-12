@@ -26,7 +26,7 @@ export default async function Home() {
         <About />
         <Products categories={categories} products={products} />
         <WhyPandanara />
-        <Gallery />
+        {/* <Gallery /> */}
         <CTA />
       </main>
       <Footer />

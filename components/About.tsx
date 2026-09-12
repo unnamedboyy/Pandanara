@@ -25,15 +25,15 @@ export default function About() {
             <br />
             Thoughtfully made.
           </h2>
-          <p className="mt-6 max-w-[460px] text-[16px] leading-relaxed text-ink/70">
-            [Tuliskan cerita singkat tentang Pandanara di sini — bagaimana
-            camilan ini dibuat, apa yang membuatnya berbeda, dan siapa yang
-            berada di baliknya.]
-          </p>
-          <p className="mt-4 max-w-[460px] text-[16px] leading-relaxed text-ink/70">
-            [Tambahkan detail pendukung lain jika diperlukan, misalnya nilai
-            yang dipegang Pandanara dalam membuat setiap camilan.]
-          </p>
+            <p className="mt-6 max-w-[460px] text-[16px] leading-relaxed text-ink/70">
+              Pandanara lahir dari kebiasaan sederhana: bikin camilan sendiri di rumah,
+              lalu dibagikan ke orang-orang terdekat. Dari situ kami belajar bahwa rasa
+              yang jujur selalu lebih diingat daripada yang rumit.
+            </p>
+            <p className="mt-4 max-w-[460px] text-[16px] leading-relaxed text-ink/70">
+              Kami percaya camilan yang baik tidak harus mahal atau ribet — cukup dibuat
+              dengan bahan yang jelas dan proses yang diperhatikan setiap langkahnya.
+            </p>
         </Reveal>
       </div>
     </section>

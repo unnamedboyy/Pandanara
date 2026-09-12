@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-forest: #244A3A;
+  /* hijau */
+  /* --color-forest: #244A3A;
   --color-forest-light: #33604C;
   --color-forest-dark: #1A3A2C;
-  --color-pandan: #7E9B78;
+  --color-pandan: #7E9B78; */
+  /* merah */
+  --color-forest: #7A2E27;
+  --color-forest-light: #9C4438;
+  --color-forest-dark: #5C1E19;
   --color-cream: #F8F6F0;
   --color-sand: #EFEDE5;
   --color-ink: #20231F;
@@ -43,9 +48,12 @@ html { scroll-behavior: smooth; }
     scroll-behavior: auto !important;
   }
 }
-
-::selection { background-color: #244a3a; color: #f8f6f0; }
-:focus-visible { outline: 2px solid #244a3a; outline-offset: 3px; border-radius: 2px; }
+/* hijau */
+/* ::selection { background-color: #244a3a; color: #f8f6f0; }
+:focus-visible { outline: 2px solid #244a3a; outline-offset: 3px; border-radius: 2px; } */
+/* merah */
+::selection { background-color: var(--color-forest); color: var(--color-cream); }
+:focus-visible { outline: 2px solid var(--color-forest); outline-offset: 3px; border-radius: 2px; }
 body { font-feature-settings: "kern" 1, "liga" 1; }
 
 .reveal {

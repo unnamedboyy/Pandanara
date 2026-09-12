@@ -128,17 +128,17 @@ export const features: Feature[] = [
   {
     number: "01",
     title: "Dibuat dengan penuh perhatian",
-    description: "[Tuliskan detail proses pembuatan Pandanara di sini.]",
+    description: "Setiap camilan dibuat dengan tangan, bukan sekadar diproduksi.",
   },
   {
     number: "02",
     title: "Bahan pilihan",
-    description: "[Tuliskan detail bahan yang digunakan di sini.]",
+    description: "Kami pilih bahan yang enak dan nyaman di lidah, bukan asal murah.",
   },
   {
     number: "03",
     title: "Teman di setiap momen",
-    description: "[Tuliskan konteks penggunaan produk di sini.]",
+    description: "Cocok buat nemenin kerja, ngobrol, sampai kumpul keluarga.",
   },
 ];
 

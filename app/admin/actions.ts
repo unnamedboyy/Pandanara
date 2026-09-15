@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { uploadImage } from "@/lib/storage";
 
 // ---------- Categories ----------
 
@@ -50,17 +51,22 @@ export async function createProduct(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
   const price = String(formData.get("price") ?? "").trim();
-  const imageUrl = String(formData.get("image_url") ?? "").trim();
   const categoryId = String(formData.get("category_id") ?? "");
   const sortOrder = Number(formData.get("sort_order") ?? 0);
+  const imageFile = formData.get("image_file");
 
   if (!name || !price || !categoryId) return;
+
+  let imageUrl: string | null = null;
+  if (imageFile instanceof File && imageFile.size > 0) {
+    imageUrl = await uploadImage(imageFile, "products");
+  }
 
   await supabaseAdmin.from("products").insert({
     name,
     description: description || null,
     price,
-    image_url: imageUrl || null,
+    image_url: imageUrl,
     category_id: categoryId,
     sort_order: sortOrder,
   });
@@ -74,23 +80,26 @@ export async function updateProduct(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
   const price = String(formData.get("price") ?? "").trim();
-  const imageUrl = String(formData.get("image_url") ?? "").trim();
   const categoryId = String(formData.get("category_id") ?? "");
   const sortOrder = Number(formData.get("sort_order") ?? 0);
   const isActive = formData.get("is_active") === "on";
+  const imageFile = formData.get("image_file");
 
-  await supabaseAdmin
-    .from("products")
-    .update({
-      name,
-      description: description || null,
-      price,
-      image_url: imageUrl || null,
-      category_id: categoryId,
-      sort_order: sortOrder,
-      is_active: isActive,
-    })
-    .eq("id", id);
+  const updateData: Record<string, unknown> = {
+    name,
+    description: description || null,
+    price,
+    category_id: categoryId,
+    sort_order: sortOrder,
+    is_active: isActive,
+  };
+
+  // Kalau tidak ada file baru dipilih, image_url lama dibiarkan apa adanya.
+  if (imageFile instanceof File && imageFile.size > 0) {
+    updateData.image_url = await uploadImage(imageFile, "products");
+  }
+
+  await supabaseAdmin.from("products").update(updateData).eq("id", id);
 
   revalidatePath("/");
   revalidatePath("/admin");

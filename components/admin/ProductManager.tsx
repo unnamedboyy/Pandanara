@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Pencil, Trash2, X, Check } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Check, ImagePlus } from "lucide-react";
 import type { AdminCategory, AdminProduct } from "@/lib/admin";
 
 type Actions = {
@@ -27,6 +27,110 @@ export default function ProductManager({
 
   return (
     <div className="flex flex-col gap-3">
+      {showAddForm ? (
+        <form
+          action={async (formData) => {
+            await actions.createProduct(formData);
+            setShowAddForm(false);
+          }}
+          className="rounded-card border border-forest/30 bg-white p-4 flex flex-col gap-3"
+        >
+          <div>
+            <label className="text-[12px] text-ink/50">Nama produk</label>
+            <input
+              name="name"
+              required
+              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-[12px] text-ink/50">Deskripsi</label>
+            <textarea
+              name="description"
+              rows={2}
+              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none resize-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-[12px] text-ink/50">Harga</label>
+              <input
+                name="price"
+                required
+                placeholder="Rp 20.000"
+                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
+              />
+            </div>
+            <div>
+              <label className="text-[12px] text-ink/50">Urutan</label>
+              <input
+                name="sort_order"
+                type="number"
+                defaultValue={0}
+                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="text-[12px] text-ink/50">Kategori</label>
+            <select
+              name="category_id"
+              required
+              defaultValue=""
+              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none bg-white"
+            >
+              <option value="" disabled>
+                Pilih kategori
+              </option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="text-[12px] text-ink/50 mb-1 flex items-center gap-1.5">
+              <ImagePlus size={13} /> Foto produk
+            </label>
+            <input
+              name="image_file"
+              type="file"
+              accept="image/*"
+              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[13.5px] file:mr-3 file:rounded-btn file:border-0 file:bg-sand file:px-3 file:py-1.5 file:text-[13px] file:text-ink/70"
+            />
+          </div>
+
+          <div className="flex gap-2 mt-1">
+            <button
+              type="submit"
+              className="flex-1 rounded-btn bg-forest text-cream py-2.5 text-[14px]"
+            >
+              Tambah Produk
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowAddForm(false)}
+              className="flex-1 rounded-btn border border-ink/15 text-ink/60 py-2.5 text-[14px]"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setShowAddForm(true)}
+          className="flex items-center justify-center gap-2 rounded-card border border-dashed border-ink/20 py-3.5 text-[14px] text-ink/60 hover:border-forest hover:text-forest"
+        >
+          <Plus size={16} /> Tambah Produk
+        </button>
+      )}
+
       {products.map((product) =>
         editingId === product.id ? (
           <form
@@ -98,14 +202,28 @@ export default function ProductManager({
             </div>
 
             <div>
-              <label className="text-[12px] text-ink/50">
-                URL foto (dari Supabase Storage)
+              <label className="text-[12px] text-ink/50 mb-1 flex items-center gap-1.5">
+                <ImagePlus size={13} /> Foto produk
               </label>
+
+              {product.image_url && (
+                <div className="mt-1 mb-2 flex items-center gap-2">
+                  <img
+                    src={product.image_url}
+                    alt={product.name}
+                    className="h-14 w-14 rounded-btn object-cover border border-ink/10"
+                  />
+                  <p className="text-[12px] text-ink/45">
+                    Foto saat ini — pilih file baru untuk mengganti
+                  </p>
+                </div>
+              )}
+
               <input
-                name="image_url"
-                defaultValue={product.image_url ?? ""}
-                placeholder="https://xxxxx.supabase.co/storage/v1/object/public/..."
-                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[13.5px] focus:border-forest outline-none"
+                name="image_file"
+                type="file"
+                accept="image/*"
+                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[13.5px] file:mr-3 file:rounded-btn file:border-0 file:bg-sand file:px-3 file:py-1.5 file:text-[13px] file:text-ink/70"
               />
             </div>
 
@@ -182,109 +300,6 @@ export default function ProductManager({
             </div>
           </div>
         )
-      )}
-
-      {showAddForm ? (
-        <form
-          action={async (formData) => {
-            await actions.createProduct(formData);
-            setShowAddForm(false);
-          }}
-          className="rounded-card border border-forest/30 bg-white p-4 flex flex-col gap-3"
-        >
-          <div>
-            <label className="text-[12px] text-ink/50">Nama produk</label>
-            <input
-              name="name"
-              required
-              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-            />
-          </div>
-
-          <div>
-            <label className="text-[12px] text-ink/50">Deskripsi</label>
-            <textarea
-              name="description"
-              rows={2}
-              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none resize-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-[12px] text-ink/50">Harga</label>
-              <input
-                name="price"
-                required
-                placeholder="Rp 20.000"
-                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-              />
-            </div>
-            <div>
-              <label className="text-[12px] text-ink/50">Urutan</label>
-              <input
-                name="sort_order"
-                type="number"
-                defaultValue={0}
-                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="text-[12px] text-ink/50">Kategori</label>
-            <select
-              name="category_id"
-              required
-              defaultValue=""
-              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none bg-white"
-            >
-              <option value="" disabled>
-                Pilih kategori
-              </option>
-              {categories.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="text-[12px] text-ink/50">
-              URL foto (dari Supabase Storage)
-            </label>
-            <input
-              name="image_url"
-              placeholder="https://xxxxx.supabase.co/storage/v1/object/public/..."
-              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[13.5px] focus:border-forest outline-none"
-            />
-          </div>
-
-          <div className="flex gap-2 mt-1">
-            <button
-              type="submit"
-              className="flex-1 rounded-btn bg-forest text-cream py-2.5 text-[14px]"
-            >
-              Tambah Produk
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowAddForm(false)}
-              className="flex-1 rounded-btn border border-ink/15 text-ink/60 py-2.5 text-[14px]"
-            >
-              Batal
-            </button>
-          </div>
-        </form>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setShowAddForm(true)}
-          className="flex items-center justify-center gap-2 rounded-card border border-dashed border-ink/20 py-3.5 text-[14px] text-ink/60 hover:border-forest hover:text-forest"
-        >
-          <Plus size={16} /> Tambah Produk
-        </button>
       )}
     </div>
   );

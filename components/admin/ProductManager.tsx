@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { Plus, Pencil, Trash2, X, Check, ImagePlus } from "lucide-react";
 import type { AdminCategory, AdminProduct } from "@/lib/admin";
+import type { ActionResult } from "@/app/admin/actions";
+import { useToast } from "./Toast";
 
 type Actions = {
-  createProduct: (formData: FormData) => void;
-  updateProduct: (formData: FormData) => void;
-  deleteProduct: (formData: FormData) => void;
+  createProduct: (formData: FormData) => Promise<ActionResult>;
+  updateProduct: (formData: FormData) => Promise<ActionResult>;
+  deleteProduct: (formData: FormData) => Promise<ActionResult>;
 };
 
 export default function ProductManager({
@@ -21,6 +23,7 @@ export default function ProductManager({
 }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const { showToast } = useToast();
 
   const categoryName = (id: string) =>
     categories.find((c) => c.id === id)?.name ?? "-";
@@ -30,8 +33,9 @@ export default function ProductManager({
       {showAddForm ? (
         <form
           action={async (formData) => {
-            await actions.createProduct(formData);
-            setShowAddForm(false);
+            const result = await actions.createProduct(formData);
+            showToast(result.success ? "success" : "error", result.message);
+            if (result.success) setShowAddForm(false);
           }}
           className="rounded-card border border-forest/30 bg-white p-4 flex flex-col gap-3"
         >
@@ -53,25 +57,14 @@ export default function ProductManager({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-[12px] text-ink/50">Harga</label>
-              <input
-                name="price"
-                required
-                placeholder="Rp 20.000"
-                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-              />
-            </div>
-            <div>
-              <label className="text-[12px] text-ink/50">Urutan</label>
-              <input
-                name="sort_order"
-                type="number"
-                defaultValue={0}
-                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-              />
-            </div>
+          <div>
+            <label className="text-[12px] text-ink/50">Harga</label>
+            <input
+              name="price"
+              required
+              placeholder="Rp 20.000"
+              className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
+            />
           </div>
 
           <div>
@@ -136,8 +129,9 @@ export default function ProductManager({
           <form
             key={product.id}
             action={async (formData) => {
-              await actions.updateProduct(formData);
-              setEditingId(null);
+              const result = await actions.updateProduct(formData);
+              showToast(result.success ? "success" : "error", result.message);
+              if (result.success) setEditingId(null);
             }}
             className="rounded-card border border-forest/30 bg-white p-4 flex flex-col gap-3"
           >
@@ -163,26 +157,15 @@ export default function ProductManager({
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="text-[12px] text-ink/50">Harga</label>
-                <input
-                  name="price"
-                  defaultValue={product.price}
-                  required
-                  placeholder="Rp 20.000"
-                  className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-[12px] text-ink/50">Urutan</label>
-                <input
-                  name="sort_order"
-                  type="number"
-                  defaultValue={product.sort_order}
-                  className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
-                />
-              </div>
+            <div>
+              <label className="text-[12px] text-ink/50">Harga</label>
+              <input
+                name="price"
+                defaultValue={product.price}
+                required
+                placeholder="Rp 20.000"
+                className="mt-1 w-full rounded-btn border border-ink/15 px-3 py-2 text-[14.5px] focus:border-forest outline-none"
+              />
             </div>
 
             <div>
@@ -281,7 +264,10 @@ export default function ProductManager({
                 <Pencil size={16} />
               </button>
               <form
-                action={actions.deleteProduct}
+                action={async (formData) => {
+                  const result = await actions.deleteProduct(formData);
+                  showToast(result.success ? "success" : "error", result.message);
+                }}
                 onSubmit={(e) => {
                   if (!confirm(`Hapus produk "${product.name}"?`)) {
                     e.preventDefault();

@@ -17,11 +17,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pandanara — Camilan Pilihan untuk Setiap Momen",
+  title: "Pandanara - Camilan Pilihan untuk Setiap Momen",
   description:
     "Temukan camilan Pandanara yang dibuat untuk menemani setiap momen — sederhana, lezat, dan penuh rasa.",
   openGraph: {
-    title: "Pandanara — Camilan Pilihan untuk Setiap Momen",
+    title: "Pandanara - Camilan Pilihan untuk Setiap Momen",
     description:
       "Temukan camilan Pandanara yang dibuat untuk menemani setiap momen — sederhana, lezat, dan penuh rasa.",
     url: "https://pandanara.example.com",

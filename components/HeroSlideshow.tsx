@@ -38,7 +38,6 @@ export default function HeroSlideshow({
               transition: `opacity 1500ms ease, transform ${intervalMs}ms ease-out`,
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
               alt=""
@@ -51,9 +50,7 @@ export default function HeroSlideshow({
         );
       })}
 
-      {/* Bikin foto menyatu dengan warna latar cream, sekaligus jaga
-          keterbacaan teks di atasnya. */}
-      <div className="absolute inset-0 bg-cream/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-cream/80 via-cream/40 to-cream/0" />
     </div>
   );
 }

@@ -50,7 +50,8 @@ export default function HeroSlideshow({
         );
       })}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-cream/80 via-cream/40 to-cream/0" />
+
+      <div className="absolute inset-0 bg-cream/90" />
     </div>
   );
 }

@@ -9,7 +9,7 @@ export const siteConfig = {
   instagramUrl: "https://www.instagram.com/pandanara_snack/",
 
   // TODO: isi nomor WhatsApp bisnis, format internasional tanpa "+"
-  whatsappNumber: "6281344289836",
+  whatsappNumber: "6285600971379",
 
   // TODO: isi lokasi / kota operasional Pandanara
   location: "Yogyakarta, Indonesia",
@@ -31,6 +31,11 @@ export function getWhatsappUrl(customMessage?: string) {
 
 export const images = {
   hero: "/images/hero.jpg",
+    heroSlides: [
+    "/images/hero-1.jpg",
+    "/images/hero-2.jpg",
+    "/images/hero-3.jpg",
+  ],
   about: "/logo.png",
 };
 

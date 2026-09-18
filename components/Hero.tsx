@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { images, getWhatsappUrl } from "@/lib/siteConfig";
-import Frame from "./Frame";
+import HeroSlideshow from "./HeroSlideshow";
 import Reveal from "./Reveal";
 
 export default function Hero() {
@@ -9,7 +9,9 @@ export default function Hero() {
       id="home"
       className="relative pt-[150px] pb-20 md:pt-[190px] md:pb-28 overflow-hidden"
     >
-      <div className="mx-auto max-w-container px-6 md:px-10 items-center">
+      <HeroSlideshow images={images.heroSlides} />
+
+      <div className="relative z-10 mx-auto max-w-container px-6 md:px-10 items-center">
         <div>
           <Reveal>
             <p className="text-[13px] tracking-[0.16em] text-clay uppercase mb-5 text-center md:text-center md:mb-6 md:text-[14px] md:tracking-[0.2em]">
@@ -34,7 +36,7 @@ export default function Hero() {
 
           <Reveal delay={240}>
             <div className="mt-9 flex flex-wrap items-center gap-4 justify-center">
-              <a
+              
                 href={getWhatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -42,7 +44,7 @@ export default function Hero() {
               >
                 Order Now
               </a>
-              <a
+              
                 href="#products"
                 className="group inline-flex items-center gap-2 text-[15px] text-ink border-b border-ink/30 pb-1 transition-colors duration-400 hover:border-forest hover:text-forest"
               >

@@ -37,6 +37,7 @@ export default function Hero() {
           <Reveal delay={240}>
             <div className="mt-9 flex flex-wrap items-center gap-4 justify-center">
               
+              <a
                 href={getWhatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -45,6 +46,7 @@ export default function Hero() {
                 Order Now
               </a>
               
+              <a
                 href="#products"
                 className="group inline-flex items-center gap-2 text-[15px] text-ink border-b border-ink/30 pb-1 transition-colors duration-400 hover:border-forest hover:text-forest"
               >

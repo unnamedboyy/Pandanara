@@ -20,12 +20,12 @@ const contactItems = [
     value: siteConfig.location || "[Lokasi Pandanara]",
     href: undefined,
   },
-  {
-    icon: Mail,
-    label: "Email",
-    value: siteConfig.email || "[Email Pandanara]",
-    href: siteConfig.email ? `mailto:${siteConfig.email}` : undefined,
-  },
+  // {
+  //   icon: Mail,
+  //   label: "Email",
+  //   value: siteConfig.email || "[Email Pandanara]",
+  //   href: siteConfig.email ? `mailto:${siteConfig.email}` : undefined,
+  // },
 ];
 
 export default function Footer() {
